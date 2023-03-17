@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f6f42f3b-9cce-4377-9ec1-1a76b255e946">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="no_services" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     m_pelanggan.`kode_pel` AS m_pelanggan_kode_pel,
+     m_pelanggan.`nama` AS m_pelanggan_nama,
+     m_spareparts.`name_spare` AS m_spareparts_name_spare,
+     m_spareparts.`harga` AS m_spareparts_harga,
+     m_spareparts.`kode` AS m_spareparts_kode,
+     t_services.`no_services` AS t_services_no_services,
+     t_services.`tgl` AS t_services_tgl,
+     t_services.`total` AS t_services_total,
+     t_services.`kd_pel` AS t_services_kd_pel,
+     transaksi.`no_services` AS transaksi_no_services,
+     transaksi.`kode_spare` AS transaksi_kode_spare,
+     transaksi.`jml_item` AS transaksi_jml_item,
+     transaksi.`discount` AS transaksi_discount,
+     transaksi.`jml_bayar` AS transaksi_jml_bayar
+FROM
+     `transaksi` transaksi INNER JOIN `t_services` t_services ON transaksi.`no_services` = t_services.`no_services`
+     INNER JOIN `m_pelanggan` m_pelanggan ON t_services.`kd_pel` = m_pelanggan.`kode_pel`
+     INNER JOIN `m_spareparts` m_spareparts ON transaksi.`kode_spare` = m_spareparts.`kode`
+WHERE
+	t_services.no_services = $P{no_services}]]>
+	</queryString>
+	<field name="m_pelanggan_kode_pel" class="java.lang.String"/>
+	<field name="m_pelanggan_nama" class="java.lang.String"/>
+	<field name="m_spareparts_name_spare" class="java.lang.String"/>
+	<field name="m_spareparts_harga" class="java.lang.Integer"/>
+	<field name="m_spareparts_kode" class="java.lang.String"/>
+	<field name="t_services_no_services" class="java.lang.String"/>
+	<field name="t_services_tgl" class="java.sql.Date"/>
+	<field name="t_services_total" class="java.lang.Integer"/>
+	<field name="t_services_kd_pel" class="java.lang.String"/>
+	<field name="transaksi_no_services" class="java.lang.String"/>
+	<field name="transaksi_kode_spare" class="java.lang.String"/>
+	<field name="transaksi_jml_item" class="java.lang.Integer"/>
+	<field name="transaksi_discount" class="java.lang.Long"/>
+	<field name="transaksi_jml_bayar" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="143" splitType="Stretch">
+			<staticText>
+				<reportElement x="150" y="38" width="255" height="66" uuid="ef6e0d42-4a29-4360-a08a-0cc9cd8d5bc2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="36"/>
+				</textElement>
+				<text><![CDATA[Kuintansi]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="122" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="6a55476e-797b-4a26-915f-81e7374c78e0"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="36" width="81" height="15" uuid="01c939ee-0abc-4f54-9875-5281fa298a8c"/>
+				<text><![CDATA[No Services]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="61" width="63" height="15" uuid="2460e99a-de1e-4312-896c-6419b23c50a9"/>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="424" y="107" width="83" height="15" uuid="44b0488b-9153-4610-8b66-2f1e8c144a96"/>
+				<text><![CDATA[Jumlah Bayar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="107" width="81" height="15" uuid="232e4bcd-9f01-4e84-8fbf-6f721381335a"/>
+				<text><![CDATA[Kode Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="92" y="107" width="88" height="15" uuid="87c13468-63db-4c7e-852f-13f6c2a71a2f"/>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="294" y="107" width="78" height="15" uuid="2d3713af-af27-4a60-86db-3561b582c65a"/>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="197" y="107" width="82" height="15" uuid="1725280a-56c8-4d81-b8b0-a632a6d95624"/>
+				<text><![CDATA[Jumlah Item]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="97" y="36" width="156" height="15" uuid="bd934f89-7e57-4a0e-9f7d-581ed4005a60"/>
+				<textFieldExpression><![CDATA[$F{t_services_no_services}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="97" y="61" width="127" height="15" uuid="895c8033-c89e-494f-9a19-ee957c13bb0b"/>
+				<textFieldExpression><![CDATA[$F{t_services_tgl}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="372" y="61" width="158" height="15" uuid="c7d71ed0-bc8e-4eee-9983-3d567b93acff"/>
+				<textFieldExpression><![CDATA[$F{m_pelanggan_nama}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="9cee0e44-b58a-4add-bb1b-8af71b3e699b"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="92" y="1" width="88" height="17" uuid="59a66a20-e2a1-45bb-bfe2-9295e9f451db"/>
+				<textFieldExpression><![CDATA[$F{m_spareparts_name_spare}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="294" y="0" width="78" height="15" uuid="1f19a106-ac6c-4d10-8761-fd3ecdc8f967"/>
+				<textFieldExpression><![CDATA[$F{m_spareparts_harga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="197" y="0" width="82" height="15" uuid="6b21aa12-2361-42d2-9d5b-ab76958f16da"/>
+				<textFieldExpression><![CDATA[$F{transaksi_jml_item}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="424" y="0" width="89" height="15" uuid="5453949d-d4cb-4889-ae17-25697bf9daa8"/>
+				<textFieldExpression><![CDATA[$F{transaksi_jml_bayar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="0" y="1" width="83" height="15" uuid="e4e12577-e7f1-4f2f-a8b8-f33d4aa3abf3"/>
+				<textFieldExpression><![CDATA[$F{transaksi_kode_spare}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="54" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="f210b668-23bb-47b9-94bc-4918b12115e5"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
